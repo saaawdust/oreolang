@@ -1,7 +1,0 @@
-/*!-------------------------------------------------------------------
- * Copyright (C) saaawdust@Gunshot Sound Studios. All rights reserved.
- *------------------------------------------------------------------*/
-
-let myClass = import("./class");
-
-myClass.new("Hello, World!"):myMethod();
