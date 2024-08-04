@@ -5,8 +5,6 @@ import { binaryExpression, expression } from "./shared";
 import { loc } from "./token";
 import parsePrimary from "./parsePrimary";
 
-
-
 function isBinaryOp(parser: Parser): boolean {
     let future =  parser.peek_future(1);
 
@@ -40,16 +38,22 @@ function parseBinaryExpression(parser: Parser, left: expression | binaryExpressi
         let right: any = parsePrimary(parser);
 
         while (true) {
+            parser.next();
             const nextOp = parser.peek();
-            const nextOpPrecedence = getPrecedence(String(nextOp));
-
-            if (nextOp.type === 'Operator' && nextOpPrecedence > opPrecedence) {
+            if (!nextOp || nextOp.type !== 'Operator') break;
+            
+            const nextOpPrecedence = getPrecedence(String(nextOp.value));
+          
+            // If the precedence of the next operator is higher, parse it recursively
+            if (nextOpPrecedence > opPrecedence) {
+                
                 right = parseBinaryExpression(parser, right, nextOpPrecedence);
             } else {
                 break;
             }
         }
-
+        
+        
         left = {
             type: 'BinaryExpression',
             operator: String(op.value),
@@ -63,8 +67,6 @@ function parseBinaryExpression(parser: Parser, left: expression | binaryExpressi
             right
         };
     }
-
-    parser.next();
 
     return left;
 }

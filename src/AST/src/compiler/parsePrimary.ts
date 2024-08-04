@@ -17,7 +17,7 @@ export default ((parser: Parser) => {
             if (token.value == '(') {
                 parser.next(); // consume '('
 
-                if (!parser.eof()) {
+                if (parser.eof()) {
                     error_lint(7, `Expected closing parenthesis ")" when parsing parenthesis, got 'nothing'\n${chalk.blue(`--> ${parser.options.fileName}:${token.loc.line}:${token.loc.column}:`)}\n${error_lint_constructLines(
                         loc(
                             token.loc.line,
@@ -38,6 +38,8 @@ export default ((parser: Parser) => {
 
                 const expr = parseExpr(parser);
                 const nextToken = parser.peek_future(1);
+
+                parser.backtrack();
 
                 expectValue(parser, ")", 7, `Expected closing parenthesis ")" when parsing parenthesis, got '${nextToken != undefined && nextToken.value || "nothing"}'\n${chalk.blue(`--> ${parser.options.fileName}:${nextToken != undefined && nextToken.loc.line || token.loc.line}:${nextToken != undefined && nextToken.loc.column || token.loc.start}:`)}\n${error_lint_constructLines(
                     loc(
