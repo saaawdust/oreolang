@@ -1,0 +1,9 @@
+/*!-------------------------------------------------------------------
+ * Copyright (C) saaawdust@Gunshot Sound Studios. All rights reserved.
+ *------------------------------------------------------------------*/
+
+let fib = import("./math").fib;
+
+for let i = 0, 10 {
+    print(fib(i));
+}

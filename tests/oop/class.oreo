@@ -1,0 +1,17 @@
+/*!-------------------------------------------------------------------
+ * Copyright (C) saaawdust@Gunshot Sound Studios. All rights reserved.
+ *------------------------------------------------------------------*/
+
+let class = {};
+class.__index = class;
+
+fn class.new(value) {
+    let self = { ["value"] = value };
+    return setmetatable(self, class);
+}
+
+fn class:myMethod() {
+    print(self.value);
+}
+
+return class;
