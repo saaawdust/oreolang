@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "The compiler for the oreo language",
   "main": "src/index.js",
-  "scripts": {},
+  "scripts": {
+    "setup": "npm i -g . && echo Oreo has been successfully installed!"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

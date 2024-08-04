@@ -1,7 +1,7 @@
 // Copyright (c) 2024 saaawdust. All rights reserved.
 
 import chalk from 'chalk';
-import { existsSync, statSync } from 'fs';
+import { existsSync, readFileSync, statSync } from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { buildFile, buildProject } from './compile';
@@ -14,8 +14,11 @@ export function writeError(string: string) {
     process.exit(1);
 }
 
-yargs(hideBin(process.argv))
+const version = JSON.parse(readFileSync('./package.json').toString()).version
+
+const argv: any = yargs(hideBin(process.argv))
     .scriptName("oreo")
+    .version(version)
     .command(
         "compile <input> [output]",
         "Compiles a '.or' file or project to the given output or cwd.",
@@ -76,3 +79,8 @@ yargs(hideBin(process.argv))
     .alias('v', 'verbose')
     .help()
     .argv;
+
+if (argv._.length == 0) {
+    console.log(`Oreo version ${version}`);
+    process.exit(0);
+}
