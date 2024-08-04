@@ -1,0 +1,9 @@
+{
+    "name": "myProject",
+    "version": "0.0.1",
+    "description": "",
+    "main": "src/main.oreo",
+    "out": "build",
+    "author": "shado",
+    "license": "MIT"
+}

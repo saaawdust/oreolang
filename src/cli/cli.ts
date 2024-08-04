@@ -14,7 +14,7 @@ export function writeError(string: string) {
     process.exit(1);
 }
 
-const version = JSON.parse(readFileSync('./package.json').toString()).version
+const version = JSON.parse(readFileSync(join(__dirname, '../../package.json')).toString()).version
 
 const argv: any = yargs(hideBin(process.argv))
     .scriptName("oreo")
